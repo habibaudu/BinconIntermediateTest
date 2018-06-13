@@ -86,7 +86,7 @@ def get_groups_joined_by_friends():
            groups_joined_by_my_facebookfriends.append(mydictt.copy())  #creates a json
     #pprint(groups_joined_by_my_facebookfriends)
     jsondata = open("groups_joined_by_my_facebookfriends.json","w")
-    json.dump(groups_joined_by_my_facebookfriends,j)
+    json.dump(groups_joined_by_my_facebookfriends,jsondata)
 
     return jsondata
 
@@ -131,6 +131,7 @@ mutual_no=get_mutual()
 
 import scipy as sp
 import scipy.stats as st
+import numpy as np
 
 data=(female_no,mutual_no,groupsjson)
 
@@ -138,7 +139,7 @@ data=(female_no,mutual_no,groupsjson)
 #taking Confidence Interval of 0.10 and confidence level of 90%
 
 def mean_confidence_interval(data, confidence=0.90):
-    data=(no_of_females,actual_dict,my_json)
+    data=(female_no,mutual_no,groupsjson)
     a = 1.0*np.array(data)
     n = len(a)
     loc, scale = np.mean(a), st.sem(a)
@@ -146,10 +147,10 @@ def mean_confidence_interval(data, confidence=0.90):
     #h = scale * st.t._ppf((1+confidence)/2., n-1)
     #return m, m-h, m+h
 
-   chosen_range = range(10,30)
+    chosen_range = range(10,30)
 
-   mean_confidence_interval(chosen_range)
-   st.t.interval(0.90, len(a)-1, loc=np.mean(a), scale=st.sem(a))
+    mean_confidence_interval(chosen_range)
+    st.t.interval(0.90, len(a)-1, loc=np.mean(a), scale=st.sem(a))
 
 
 mean_confidence_interval(data, confidence=0.90)
